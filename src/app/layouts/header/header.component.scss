@@ -1,0 +1,45 @@
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+.example-app-name {
+  margin-left: 5%;
+  margin-top: 1%;
+}
+
+.example-form-field {
+  margin-top: 23px;
+  margin-left: 100px;
+  width: 30%;
+}
+
+.example-toolbar {
+  background-color: black;
+}
+
+.example-app-name {
+  color: white;
+}
+
+.material-symbols-outlined {
+  color: white;
+}
+.material-symbols{
+  color: black;
+}
+
+.cart {
+  margin-right: 20px;
+  margin-left: 550px;
+}
+
+.fav {
+  margin-right: 20px;
+}
+
+.search{
+  margin-left: 20px;
+  padding-top: 2px;
+}

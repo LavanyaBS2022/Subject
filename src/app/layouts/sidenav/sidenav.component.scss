@@ -1,0 +1,36 @@
+mat-list-item {
+    padding: 10px 0px;
+    width: 230px;
+    cursor: pointer !important;
+
+    a {
+        letter-spacing: 0.6px;
+        color: #8b8c8c;
+        text-decoration: none;
+        -webkit-transform: translateZ(0) scale(1, 1);
+        -webkit-transition: 0.1s linear;
+        transition: all 0.1s li;
+        margin-left: 20px;
+        font-weight: 500;
+
+        .mat-icon {
+            height: 20px;
+        }
+    }
+
+    &.active {
+        background: #d2d8dd;
+        border-radius: 0px;
+        // border-radius: 0px 27px 27px 0px;
+        box-shadow: -1px 3px 5px 2px rgb(211 211 211 / 46%);
+        border-left: 6px solid #68a4e0;
+        filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=10.38, OffY=10.38, Color='#D3D3D3');
+
+        a {
+            letter-spacing: 0.3px;
+            font-weight: 600;
+            color: #68a4e0;
+            margin-left: 13px;
+        }
+    }
+}

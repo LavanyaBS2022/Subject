@@ -1,0 +1,18 @@
+<div class="container">
+  <ng-container *ngFor="let product of products">
+    <mat-card class="example-card" *ngIf="product.cart==true" (click)="productDetail(product.id)">
+      <mat-card-header class="header">
+        <mat-card-title>{{product.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{product.img}}" alt="Picture of product" style="height: 300px; width: 300px;">
+      <h2 class="price"><strong>Price:</strong>{{product.price}}/-</h2>
+      <mat-card-actions class="footer">
+        <button class="icon" mat-icon-button>
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-raised-button class="buynow" color="primary" (click)=" toggleCart($event,product);">Remove from
+          Cart</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>

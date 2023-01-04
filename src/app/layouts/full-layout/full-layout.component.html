@@ -1,0 +1,14 @@
+<div class="example-container">
+
+    <app-header [snav]="snav"></app-header>
+
+    <mat-sidenav-container class="example-sidenav-container">
+        <mat-sidenav #snav mode="over" style="width: 200px;">
+            <app-sidenav></app-sidenav>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

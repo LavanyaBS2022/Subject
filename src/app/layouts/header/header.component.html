@@ -1,0 +1,49 @@
+<mat-toolbar class="example-toolbar">
+  <button mat-icon-button (click)="snav.toggle()">
+    <mat-icon><span class="material-symbols-outlined">menu</span></mat-icon>
+  </button>
+  <h1 class="example-app-name">Amazon</h1>
+  <mat-form-field class="example-form-field">
+    <mat-label>Search for products</mat-label>
+    <input matInput type="text">
+  </mat-form-field>
+  <div class="search">
+    <button mat-raised-button aria-label="search">Search</button>
+  </div>
+  <div class="cart">
+    <button matTooltip="Add to cart" [routerLinkActive]="['active']" routerLink="/Cart" mat-icon-button aria-label="Example icon-button with heart icon">
+      <mat-icon matBadge="{{cartCount}}" ><span class="material-symbols-outlined">
+          shopping_cart
+        </span></mat-icon>
+    </button>
+  </div>
+ <h1 style="color: white;">count: {{cartCount}}</h1>
+  <div class="fav">
+    <a> <button matTooltip="View Favorites" role="listitem" [routerLinkActive]="['active']" routerLink="/favourite" mat-icon-button aria-label="Example icon-button with heart icon">
+      <mat-icon><span class="material-symbols-outlined">
+          favorite
+        </span></mat-icon>
+    </button></a>
+  </div>
+  <div class="login">
+    <button matTooltip="User" [matMenuTriggerFor]="menu" mat-icon-button
+      aria-label="Example icon-button with heart icon">
+      <mat-icon><span class="material-symbols-outlined">
+          person
+        </span></mat-icon>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon><span class="material-symbols">
+              person
+            </span></mat-icon>User Profile
+        </button>
+        <button mat-menu-item>
+          <mat-icon><span class="material-symbols">
+              logout
+            </span></mat-icon>Logout
+        </button>
+      </mat-menu>
+    </button>
+  </div>
+
+</mat-toolbar>

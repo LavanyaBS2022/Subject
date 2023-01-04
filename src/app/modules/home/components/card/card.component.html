@@ -1,0 +1,28 @@
+<div class="container">
+  <ng-container *ngFor="let product of products">
+    <mat-card class="example-card" (click)="productDetail(product.id)">
+      <mat-card-header class="header">
+        <mat-card-title>{{product.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{product.img}}" alt="Picture of product" style="height: 300px; width: 300px;">
+      <h2 class="price"><strong>Price:</strong>{{product.price}}/-</h2>
+      <mat-card-actions class="footer">
+        <button class="icon" mat-icon-button *ngIf="product.fav == true"
+          (click)="updateFavourite($event,product.id,product.fav)" [ngStyle]="{color:color}">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button class="icon" mat-icon-button *ngIf="product.fav == false"
+          (click)="updateFavourite($event,product.id,product.fav)">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        <button mat-raised-button *ngIf="product.cart == true" (click)=" toggleCart($event,product);" class="buynow"
+          color="primary">Remove from cart</button>
+
+        <button mat-raised-button *ngIf="product.cart == false" (click)=" toggleCart($event,product);" class="buynow"
+          color="primary">Add to cart</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </ng-container>
+
+</div>
