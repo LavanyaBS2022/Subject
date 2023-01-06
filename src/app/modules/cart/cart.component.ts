@@ -10,11 +10,11 @@ import { ProductService } from '../home/shared/user.service';
 })
 export class CartComponent {
   products: any;
-  cartCount:number;
+  cartCount: number;
 
   constructor(private productService: ProductService, private router: Router) {
     this.products = productService.getCart();
-    this.cartCount= productService.cartCount;
+    this.cartCount = productService.cartCount;
   }
 
   productDetail(id: number) {

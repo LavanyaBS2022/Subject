@@ -7,7 +7,7 @@ import { products } from "./productData";
 })
 export class ProductService {
   updateCart: any;
-  cartCount:number;
+  cartCount: number;
   subject$ = new Subject<number>();
   static products: any;
 

@@ -21,6 +21,6 @@ import { AddProductsComponent } from './add-products/add-products.component';
     ProductsRoutingModule,
     MaterialModule,
   ],
-  // entryComponents:[ListProductComponent]
+  entryComponents:[AddProductsComponent]
 })
 export class ProductsModule { }
