@@ -10,8 +10,11 @@
         <button class="icon" mat-icon-button (click)="updateFavourite($event,product.id,product.fav);">
           <mat-icon>favorite</mat-icon>
         </button>
-        <button mat-raised-button class="buynow" color="primary">Buy Now</button>
-      </mat-card-actions>
+        <button mat-raised-button *ngIf="product.cart == true" (click)=" toggleCart($event,product);" class="buynow"
+        color="primary">Remove from cart</button>
+
+      <button mat-raised-button *ngIf="product.cart == false" (click)=" toggleCart($event,product);" class="buynow"
+        color="primary">Add to cart</button>      </mat-card-actions>
     </mat-card>
   </ng-container>
 </div>

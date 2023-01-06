@@ -7,8 +7,9 @@ import { products } from "./productData";
 })
 export class ProductService {
   updateCart: any;
-  cartCount = 0;
+  cartCount:number;
   subject$ = new Subject<number>();
+  static products: any;
 
 
   getProduct() {
@@ -39,8 +40,8 @@ export class ProductService {
   }
 
   setCartCount(count: number) {
-    debugger;
-    this.subject$.next(count);
+    this.cartCount = count;
+    this.subject$.next(this.cartCount);
   }
 
 }

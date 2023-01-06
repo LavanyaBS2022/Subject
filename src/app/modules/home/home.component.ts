@@ -5,7 +5,7 @@ import { ProductService } from './shared/user.service';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers:[ProductService]
+  // providers:[ProductService]
 })
 export class HomeComponent {
   opened=false;

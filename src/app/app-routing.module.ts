@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -7,7 +8,7 @@ const routes: Routes = [
   { path: 'details', loadChildren: () => import('./modules/details/details.module').then(m => m.DetailsModule) },
   { path: 'favourite', loadChildren: () => import('./modules/favourite/favourite.module').then(m => m.FavouriteModule) },
   { path: 'Cart', loadChildren: () => import('./modules/cart/cart.module').then(m => m.CartModule) },
-  { path: 'product', loadChildren: () => import('./product/product.module').then(m => m.ProductModule) }
+  { path: 'products',component:FullLayoutComponent, loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule) }
 ];
 
 @NgModule({

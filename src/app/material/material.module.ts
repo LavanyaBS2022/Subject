@@ -13,7 +13,9 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -33,7 +35,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   exports:[
     CommonModule,
@@ -49,7 +54,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatButtonModule,
     MatRadioModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 
 })

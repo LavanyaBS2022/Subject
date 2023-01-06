@@ -6,7 +6,7 @@ import { ProductService } from '../home/shared/user.service';
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  providers: [ProductService]
+  // providers: [ProductService]
 })
 export class DetailsComponent implements OnInit {
 
@@ -14,10 +14,13 @@ export class DetailsComponent implements OnInit {
   product: any;
   products: any;
   color='red';
+  cartCount:number;
   constructor(private route: ActivatedRoute,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
     private productService: ProductService) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     console.log(this.id);
+    this.cartCount= productService.cartCount;
+
   }
   ngOnInit(): void {
     this.product = this.productService.getProductId(this.id);
@@ -28,5 +31,15 @@ export class DetailsComponent implements OnInit {
       this.products = this.productService.updateFavourite(id, toggleStatus)
       console.log(this.products);
     }
-  
+    toggleCart(event: Event, prod: any) {
+      event.stopPropagation();
+      prod.cart = !prod.cart;
+      if (prod.cart == true) {
+        this.cartCount++;
+      }
+      else {
+        this.cartCount--;
+      }
+      this.productService.setCartCount(this.cartCount);
+    }
 }

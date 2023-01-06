@@ -6,15 +6,18 @@ import { ProductService } from '../home/shared/user.service';
   selector: 'app-favourite',
   templateUrl: './favourite.component.html',
   styleUrls: ['./favourite.component.scss'],
-  providers: [ProductService]
+  // providers: [ProductService]
 
 })
 export class FavouriteComponent {
 
   products: any;
+  cartCount:number;
 
   constructor(private productService: ProductService,private router:Router) {
     this.products = productService.getFavouriteProduct();
+    this.cartCount= productService.cartCount;
+
   }
   productDetails(id:number){
     this.router.navigate(['/details',id])
@@ -29,6 +32,17 @@ export class FavouriteComponent {
   
   productDetail(id: number) {
     this.router.navigate(['/details', id])
+  }
+  toggleCart(event: Event, prod: any) {
+    event.stopPropagation();
+    prod.cart = !prod.cart;
+    if (prod.cart == true) {
+      this.cartCount++;
+    }
+    else {
+      this.cartCount--;
+    }
+    this.productService.setCartCount(this.cartCount);
   }
 
 }
