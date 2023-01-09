@@ -9,6 +9,7 @@ import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 import { ListProductComponent } from './list-product/list-product.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ListProductComponent } from './list-product/list-product.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

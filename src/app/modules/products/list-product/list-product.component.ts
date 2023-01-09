@@ -16,7 +16,7 @@ export class ListProductComponent {
 
   products: any;
   dataSource:any;
-  displayedColumns: string[] = ['id', 'name', 'description', 'price'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'price','edit','delete'];
 
   constructor(private productService: ProductService,
     private router: Router, public dialog:MatDialog) {
