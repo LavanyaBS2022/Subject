@@ -15,15 +15,15 @@ export class ListProductComponent {
   post: any;
   products: any;
   dataSource: any;
-  displayedColumns: string[] = ['name', 'description', 'price', 'edit', 'delete'];
+  displayedColumns: string[] = ['name', 'description', 'price','brand','modelName', 'Action'];
   reactiveForm: any;
   currentProductId: any;
 
   constructor(private productService: ProductService,
-    private router: Router, public dialog: MatDialog, private apiService: ApiService, private toastr: ToastrService) {
-    // this.products = productService.getProduct();
-    // this.dataSource = this.products;
-  }
+    private router: Router, public readonly dialog: MatDialog, 
+    private apiService: ApiService,
+     private toastr: ToastrService) { }
+ 
 
   ngOnInit() {
     this.getProducts();
@@ -46,12 +46,21 @@ export class ListProductComponent {
     )
   }
   openDialog() {
-    const dialogRef = this.dialog.open(AddProductsComponent);
+    const dialogRef = this.dialog.open(AddProductsComponent,{});
     dialogRef.afterClosed().subscribe(result => {
       this.getProducts();
       console.log('Dialog result :${result}');
     });
   }
+  edit(id:number){
+    debugger;
+    const product=this.products .find((c: { id: number; })=> c.id===id);
+    const dialogRef = this.dialog.open(AddProductsComponent,{
+      data:product
+     });
+    console.log(product);
+  }
+  
   delete(product: any) {
     this.apiService.deleteRequest('product', product.id).subscribe((sresponse) => {
       this.toastr.success('product deleted successfully')

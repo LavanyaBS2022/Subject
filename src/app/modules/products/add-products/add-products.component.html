@@ -31,6 +31,28 @@
         Enter the Price
       </mat-error>
     </mat-form-field>
+
+    <mat-form-field class="amount" appearance="fill">
+      <mat-label>Brand name</mat-label>
+      <input matInput placeholder="Brand name" formControlName="brand" />
+      <mat-error
+        *ngIf="!reactiveForm.get('brand')?.valid && (reactiveForm.get('brand')?.['touched'])"
+      >
+        Enter the brand name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="amount" appearance="fill">
+      <mat-label>Model Name</mat-label>
+      <input matInput placeholder="Model Name" formControlName="modelName" />
+      <mat-error
+        *ngIf="!reactiveForm.get('modelName')?.valid && (reactiveForm.get('modelName')?.['touched'])"
+      >
+        Enter the model name
+      </mat-error>
+    </mat-form-field>
+
+
     <mat-dialog-actions align="end">
       <button class="reset" (click)="reset()" mat-raised-button color="grey">
         Reset
