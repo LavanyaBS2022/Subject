@@ -15,7 +15,6 @@ export class ApiService {
     return this.http.post(`${this.ROOT_URL}${url}`, body);
   }
   getRequest(url: string): Observable<any> {
-    this.spinner.show();
     return this.http.get(`${this.ROOT_URL}${url}`).pipe(
         map((response:any)=>{
           let products=[];
@@ -23,7 +22,6 @@ export class ApiService {
             response[key].id=key;
             products.push(response[key])
           }
-          this.spinner.hide();
           return products;
     }));
   }

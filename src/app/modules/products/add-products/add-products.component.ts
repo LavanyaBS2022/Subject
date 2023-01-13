@@ -14,13 +14,13 @@ export class AddProductsComponent {
   reactiveForm: FormGroup;
   post: any;
   products: any;
-  product:any;
+  product: any;
   currentProductId: any = null;
 
   constructor(private apiService: ApiService,
     private toastr: ToastrService,
     private activeRoute: ActivatedRoute,
-    private dialogRef: MatDialogRef<AddProductsComponent>,@Inject(MAT_DIALOG_DATA) public data:any ) {
+    private dialogRef: MatDialogRef<AddProductsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reactiveForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
@@ -28,22 +28,21 @@ export class AddProductsComponent {
       brand: new FormControl(null, [Validators.required]),
       modelName: new FormControl(null, [Validators.required]),
     });
-    debugger;
-    if(data){
-      this.currentProductId=data.id;
+    if (data) {
+      this.currentProductId = data.id;
       this.setFormData();
     }
   }
-  setFormData(){
+  setFormData() {
     this.reactiveForm.setValue({
-      name:this.data.name,
-      description:this.data.description,
-      price:this.data.price,
-      brand:this.data.brand,
-      modelName:this.data.modelName
+      name: this.data.name,
+      description: this.data.description,
+      price: this.data.price,
+      brand: this.data.brand,
+      modelName: this.data.modelName
     })
   }
- 
+
   reset() {
     this.reactiveForm.reset();
   }
@@ -54,14 +53,14 @@ export class AddProductsComponent {
         this.toastr.success('product created successfully')
         console.log(sresponse);
         this.dialogRef.close();
-  
+
       })
     } else {
-      this.apiService.putRequest('product',this.currentProductId, this.post).subscribe((sresponse) => {
+      this.apiService.putRequest('product', this.currentProductId, this.post).subscribe((sresponse) => {
         this.toastr.success('product updated successfully')
         console.log(sresponse);
         this.dialogRef.close();
-    
+
       })
     }
   }

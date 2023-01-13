@@ -7,6 +7,7 @@ import { ListProductComponent } from './list-product/list-product.component';
 import { DeleteProductComponent } from './delete-product/delete-product.component';
 import { MaterialModule } from 'src/app/material/material.module';
 import { AddProductsComponent } from './add-products/add-products.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { AddProductsComponent } from './add-products/add-products.component';
     CommonModule,
     ProductsRoutingModule,
     MaterialModule,
+    MatPaginatorModule
   ],
   entryComponents:[AddProductsComponent]
 })

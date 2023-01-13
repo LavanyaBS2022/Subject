@@ -9,8 +9,9 @@ import { SidenavComponent } from './layouts/sidenav/sidenav.component';
 import { HeaderComponent } from './layouts/header/header.component';
 import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 import { ListProductComponent } from './list-product/list-product.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpConfigInterceptor } from './modules/home/shared/httpConfig/http-config.interceptor';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

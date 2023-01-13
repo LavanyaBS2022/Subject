@@ -1,73 +1,73 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../home/shared/api.service';
 import { ProductService } from '../../home/shared/user.service';
 import { AddProductsComponent } from '../add-products/add-products.component';
+import { DeleteProductComponent } from '../delete-product/delete-product.component';
 
 @Component({
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
   styleUrls: ['./list-product.component.scss']
 })
-export class ListProductComponent {
+export class ListProductComponent  {
   post: any;
   products: any;
-  dataSource: any;
-  displayedColumns: string[] = ['name', 'description', 'price','brand','modelName', 'Action'];
+  displayedColumns: string[] = ['name', 'description', 'price', 'brand', 'modelName', 'Action'];
   reactiveForm: any;
   currentProductId: any;
-
-  constructor(private productService: ProductService,
-    private router: Router, public readonly dialog: MatDialog, 
+  dataSource = new MatTableDataSource<any>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
+  constructor(
+   public readonly dialog: MatDialog,
     private apiService: ApiService,
-     private toastr: ToastrService) { }
- 
+    private toastr: ToastrService) {
+     }
 
   ngOnInit() {
     this.getProducts();
   }
 
-  onSubmitClick(post: any) {
-    this.post = post;
-    this.apiService.postRequest('product.json', this.post).subscribe((sresponse) => {
-      console.log(sresponse);
-      this.getProducts();
-    })
-  }
   getProducts() {
-    debugger;
     this.apiService.getRequest('product.json').subscribe((sResponse) => {
       this.products = sResponse;
-    }, error => {
-      this.toastr.error('Something went wrong', 'please try later')
-    }
-    )
-  }
-  openDialog() {
-    const dialogRef = this.dialog.open(AddProductsComponent,{});
-    dialogRef.afterClosed().subscribe(result => {
-      this.getProducts();
-      console.log('Dialog result :${result}');
-    });
-  }
-  edit(id:number){
-    debugger;
-    const product=this.products .find((c: { id: number; })=> c.id===id);
-    const dialogRef = this.dialog.open(AddProductsComponent,{
-      data:product
-     });
-    console.log(product);
-  }
-  
-  delete(product: any) {
-    this.apiService.deleteRequest('product', product.id).subscribe((sresponse) => {
-      this.toastr.success('product deleted successfully')
-      console.log(sresponse);
-      this.getProducts();
+
+      this.products = new MatTableDataSource<any>(sResponse);
+      this.products.paginator = this.paginator
     })
   }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddProductsComponent, {});
+    dialogRef.afterClosed().subscribe(result => {
+      this.getProducts();
+    });
+  }
+
+  edit(id: number) {
+    const product = this.products.find((c: { id: number; }) => c.id === id);
+    const dialogRef = this.dialog.open(AddProductsComponent, {
+      data: product
+    });
+  }
+
+  delete(product: any) {
+    let dialogControl = this.dialog.open(DeleteProductComponent);
+    dialogControl.afterClosed().subscribe(result => {
+      if (result) {
+        this.apiService.deleteRequest('product', product.id).subscribe((sresponse) => {
+          console.log(sresponse);
+          this.getProducts();
+          this.toastr.success('product deleted successfully', 'Deleted')
+        })}
+    })
+  }
+
 }
 
 

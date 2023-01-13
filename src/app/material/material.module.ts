@@ -17,6 +17,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatTableModule,
     MatDialogModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatPaginatorModule
   ],
   exports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { NgxSpinnerModule } from "ngx-spinner";
     MatTableModule,
     MatDialogModule,
     ReactiveFormsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatPaginatorModule
   ]
 
 })
