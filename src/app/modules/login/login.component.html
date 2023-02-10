@@ -1,0 +1,31 @@
+<div class="background">
+  <div class="login-form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="username-field">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="test@123" formControlName="username">
+        <mat-error *ngIf="!loginForm.get('price')?.valid && (loginForm.get('username')?.['touched'])">
+          Please enter the valid Username </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="password-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+        <mat-error *ngIf="!loginForm.get('password')?.valid && (loginForm.get('password')?.['touched'])">
+          Please enter the password </mat-error>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div>
+        <button class="login-btn" mat-raised-button color="primary" (click)="authenticate()">Login</button>
+      </div>
+      <div class="signUp-btn">
+        <a>Need an account? <a routerLink="/sign-up">SIGN UP</a></a>
+      </div>
+
+    </form>
+  </div>
+</div>

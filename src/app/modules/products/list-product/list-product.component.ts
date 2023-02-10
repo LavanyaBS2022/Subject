@@ -2,10 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../home/shared/api.service';
-import { ProductService } from '../../home/shared/user.service';
 import { AddProductsComponent } from '../add-products/add-products.component';
 import { DeleteProductComponent } from '../delete-product/delete-product.component';
 
@@ -30,39 +28,54 @@ export class ListProductComponent  {
      }
 
   ngOnInit() {
-    this.getProducts();
+    this.getProductDetails();
   }
 
-  getProducts() {
-    this.apiService.getRequest('product.json').subscribe((sResponse) => {
-      this.products = sResponse;
+  getProductDetails() {
+    this.apiService.getRequest('/products').subscribe((sResponse) => {
+      this.products = sResponse.data;
 
-      this.products = new MatTableDataSource<any>(sResponse);
-      this.products.paginator = this.paginator
+      this.products = new MatTableDataSource<any>(sResponse.data);
+      this.products.paginator = this.paginator;
     })
   }
 
-  openDialog() {
+  openFormDialog() {
     const dialogRef = this.dialog.open(AddProductsComponent, {});
     dialogRef.afterClosed().subscribe(result => {
-      this.getProducts();
+      this.getProductDetails();
     });
   }
 
-  edit(id: number) {
-    const product = this.products.find((c: { id: number; }) => c.id === id);
-    const dialogRef = this.dialog.open(AddProductsComponent, {
-      data: product
+  // editProductDetails(id: number) {
+  //   const product = this.products.find((c: { id: number; }) => c.id === id);
+  //   const dialogRef = this.dialog.open(AddProductsComponent, {
+  //     data: product,
+  //   });
+  //   return dialogRef;
+  // }
+
+  editProductDetails(product: any) {
+    debugger
+    const dialogRef = this.dialog.open(AddProductsComponent,{data:{products:product}});
+    dialogRef.afterClosed().subscribe((event) =>{
+      debugger;
+      if(event=="Updated"){
+        this.getProductDetails();
+      }
+      else{
+        console.log("No new Updates");
+      }
     });
   }
 
-  delete(product: any) {
+
+  deleteProduct(product: any) {
     let dialogControl = this.dialog.open(DeleteProductComponent);
     dialogControl.afterClosed().subscribe(result => {
       if (result) {
-        this.apiService.deleteRequest('product', product.id).subscribe((sresponse) => {
-          console.log(sresponse);
-          this.getProducts();
+        this.apiService.deleteRequest('/products', product.id).subscribe((sresponse) => {
+          this.getProductDetails();
           this.toastr.success('product deleted successfully', 'Deleted')
         })}
     })
