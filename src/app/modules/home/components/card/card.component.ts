@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../../shared/api.service';
 import { ProductService } from '../../shared/user.service';
 
 @Component({
@@ -13,9 +14,11 @@ export class CardComponent {
   gColor='green';
   products: any;
   cartCount:number=0;
-  constructor(private productService: ProductService,
-    private router: Router) {
-    this.products = productService.getProduct();
+  constructor(private productService: ProductService,private apiService: ApiService,
+    private router: Router) {}
+
+  ngOnInit(){
+    this.getProducts();
   }
 
   productDetail(id: number) {
@@ -24,9 +27,9 @@ export class CardComponent {
 
   updateFavourite(event: any, id: number, status: boolean) {
     event.stopPropagation();
-    let toggleStatus = !status;
-    this.products = this.productService.updateFavourite(id, toggleStatus)
-    console.log(this.products);
+    // let toggleStatus = !status;
+    // this.products = this.productService.updateFavourite(id, toggleStatus)
+    // console.log(this.products);
   }
   toggleFav(event:Event,prod:any){
     event.stopPropagation();
@@ -45,6 +48,11 @@ export class CardComponent {
     this.productService.setCartCount(this.cartCount);
   }
  
+  getProducts(){
+    this.apiService.getRequest('/products').subscribe((sResponse) => {
+      this.products = sResponse.data;
+    })
+  }
 }
 
 

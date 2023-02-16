@@ -1,28 +1,34 @@
 <body>
   <div class="background">
     <div class="signUp-form">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 
         <mat-form-field appearance="fill" class="username-field">
           <mat-label>Username</mat-label>
           <input matInput placeholder="pat@example.com" formControlName="username">
-          <mat-error *ngIf="!loginForm.get('price')?.valid && (loginForm.get('username')?.['touched'])">
+          <mat-error *ngIf="!signUpForm.get('username')?.valid && (signUpForm.get('username')?.['touched'])">
             Please enter the valid Username </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" class="email-field">
-          <mat-label>E-mail</mat-label>
-          <input matInput [type]="hide ? 'email' : 'text'" formControlName="email">
-          <mat-error *ngIf="!loginForm.get('email')?.valid && (loginForm.get('email')?.['touched'])">
-            Please enter the valid E-mail </mat-error>
-        </mat-form-field>
 
         <mat-form-field appearance="fill" class="password-field">
           <mat-label>Password</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-          <mat-error *ngIf="!loginForm.get('password')?.valid && (loginForm.get('password')?.['touched'])">
+          <mat-error *ngIf="!signUpForm.get('password')?.valid && (signUpForm.get('password')?.['touched'])">
             Please enter the password </mat-error>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+
+        
+        <mat-form-field appearance="fill" class="confirmPassword-field">
+          <mat-label>Re-Enter your password </mat-label>
+          <input matInput [type]="hide ? 'confirmPassword' : 'text'" formControlName="confirmPassword">
+          <mat-error *ngIf="!signUpForm.get('confirmPassword')?.valid && (signUpForm.get('confirmPassword')?.['touched'])">
+            Please enter the valid E-mail </mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>

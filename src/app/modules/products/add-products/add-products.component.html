@@ -47,7 +47,7 @@
       <img style="width:300px;height:300px" class="imagePreview" [src]="imageURL" [alt]="reactiveForm.value.name">
     </div>
     <div class="imagePreview" *ngIf="!imageURL">
-      <img style="width:300px;height:300px" class="imagePreview" src="../../../assets/download.png" [alt]="reactiveForm.value.name">
+      <img style="width:300px;height:300px" class="imagePreview" [src]=preview [alt]="reactiveForm.value.name">
     </div>   
 
     <mat-dialog-actions align="end">

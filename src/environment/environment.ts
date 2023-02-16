@@ -1,3 +1,3 @@
 export const environment={
-    base_url:'http://localhost:2020/ecart/api/v1'
+    base_url:'http://localhost:2020/Product_mgnt/api/v1'
 }

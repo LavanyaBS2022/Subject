@@ -18,7 +18,6 @@ import { LoginModule } from "../login/login.module";
         HomeRoutingModule,
         MaterialModule,
         LoginModule,
-        LoginModule
     ]
 })
 export class HomeModule { }

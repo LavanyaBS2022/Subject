@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../home/shared/api.service';
 
@@ -16,8 +17,10 @@ export class AddProductsComponent {
   product: any;
   currentProductId: any = null;
   imageURL: string;
+  preview:any;
 
   constructor(private apiService: ApiService,
+    private sanitizer:DomSanitizer,
     private toastr: ToastrService,
     private dialogRef: MatDialogRef<AddProductsComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.reactiveForm = new FormGroup({
@@ -37,14 +40,15 @@ export class AddProductsComponent {
   }
   setForm() {
     if (this.product != null) {
-      this.reactiveForm.setValue({
+      this.reactiveForm.patchValue({
         name: this.product.name,
         description: this.product.description,
         price: this.product.price,
         brand_name: this.product.brand_name,
         model_name: this.product.model_name,
-        image: this.product.image,
+        image:this.product.image
       })
+      this.preview=this.sanitize(this.product.image);
     }
   }
 
@@ -66,7 +70,6 @@ export class AddProductsComponent {
         this.toastr.success('product created successfully')
         console.log(sresponse);
         this.dialogRef.close();
-
       })
     }
     else {
@@ -96,6 +99,9 @@ export class AddProductsComponent {
     reader.readAsDataURL(file)
   }
 
+  sanitize(url:string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+}
 
 }
 
